@@ -1,0 +1,6 @@
+w=1.377:0.001:5;
+
+for i=1:length(w)
+        wve(i)=lambda(w(i));
+        eps
+eps=5.913+0.2441w2?0.0803

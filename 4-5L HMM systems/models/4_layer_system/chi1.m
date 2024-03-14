@@ -1,0 +1,7 @@
+function [chi] = chi1(eps1,epsinf,o,d,w,mod,R)
+% polarizability of NP with radius R 
+%eps1 is the dielectric constant to the medium in which the np are in 
+
+chi = eps1*(R^3)*((espDL(epsinf,o,d,w,mod)-eps1)/(espDL(epsinf,o,d,w,mod)+2*eps1));
+end
+

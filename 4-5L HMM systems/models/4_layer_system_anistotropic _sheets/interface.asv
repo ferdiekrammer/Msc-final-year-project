@@ -1,0 +1,214 @@
+%electric permiativity for layer 1
+e1=1.78;
+%electric permiativity for layer 2 (NP)
+einf2=5.9752;
+eo2=8.8667;
+ed2=0.03799;
+emod2=1;
+%electric permiativity for layer 3
+e3=1.78;
+
+%electric permiativity for layer 4 (metal sheet)
+einf4=5.9752;
+eo4=8.8667;
+ed4=0.03799;
+emod4=1;
+
+% electric permiativity of layer 4 (dialectric sheet)
+einf5=2.25;
+eo5=0;
+ed5=0;
+emod5=0;
+% isortropic half space for layer 4
+einf6=2.25;
+eo6=0;
+ed6=0;
+emod6=0;
+
+R=25;
+
+w=1.377:0.001:3.099;
+%w=1.377;
+
+Ka=11.03354;
+
+hs=1;
+h=R+hs;
+
+a=3*R;
+
+dep=1;
+
+angl=0*(pi/180);
+
+%hf=30;
+msheet=10;
+dsheet=2;
+%for some reason if p is grater than 1 then at around 750 transmitance is
+%grater than 100%
+
+
+wavelength=[];
+for i = 1:length(w)
+    
+    wavelenth(i)=lambda(w(i));
+    
+end
+
+%RS(eps3,eps1,epsinf2,o2,d2,mod2,epsinfm,om,dm,modm,epsinfd,od,dd,modd,nwa,ucA,a,ka,R,h,dep,angl,w)
+
+% Rs=[];
+% 
+% for i = 1:length(w)
+%     
+%    Rs(i)=RS(e1,e3,einf2,eo2,ed2,emod2,einf4,eo4,ed4,emod4,einf5,eo5,ed5,emod5,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+%     
+% end
+% 
+% Rp=[];
+% %RP(eps3,eps1,epsinf2,o2,d2,mod2,epsinfm,om,dm,modm,epsinfd,od,dd,modd,nwa,ucA,a,Ka,R,h,dep,angl,w)
+% for i = 1:length(w)
+%     
+%    Rp(i)=RP(e1,e3,einf2,eo2,ed2,emod2,einf4,eo4,ed4,emod4,einf5,eo5,ed5,emod5,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+%     
+% end
+%for normal half space (layer 4)
+% Rsstand=[];
+% for i = 1:length(w)
+%     
+%    Rsstand(i)=RS(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+%     
+% end
+
+% Rpstand=[];
+% for i = 1:length(w)
+%     
+%    Rpstand(i)=RP(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+%     
+% end
+
+Ts=[];
+Rs=[];
+Tsstand=[];
+Rsstand=[];
+As=[];
+Asstand=[];
+for i = 1:length(w)
+    
+    Rs(i)=RS(e1,e3,einf2,eo2,ed2,emod2,einf4,eo4,ed4,emod4,einf5,eo5,ed5,emod5,msheet,dsheet,a,Ka,R,h,dep,angl,w(i)); 
+    Rsstand(i)=RS(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+    Ts(i)=TS(e1,e3,einf2,eo2,ed2,emod2,einf4,eo4,ed4,emod4,einf5,eo5,ed5,emod5,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+    Tsstand(i)=TS(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+    As(i)=1-Rs(i)-Ts(i);
+    Asstand(i)=1-Rsstand(i)-Tsstand(i);
+
+end
+
+Tp=[];
+Rp=[];
+Tpstand=[];
+Rpstand=[];
+Ap=[];
+Apstand=[];
+for i = 1:length(w)
+    
+    Rp(i)=RP(e1,e3,einf2,eo2,ed2,emod2,einf4,eo4,ed4,emod4,einf5,eo5,ed5,emod5,msheet,dsheet,a,Ka,R,h,dep,angl,w(i)); 
+    Rpstand(i)=RP(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+    Tp(i)=TP(e1,e3,einf2,eo2,ed2,emod2,einf4,eo4,ed4,emod4,einf5,eo5,ed5,emod5,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+    Tpstand(i)=TP(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+    Ap(i)=1-Rp(i)-Tp(i);
+    Apstand(i)=1-Rpstand(i)-Tpstand(i);
+
+end
+
+% Tp=[];
+%  
+% for i = 1:length(w)
+%      
+%     Tp(i)=TP(e1,e3,einf2,eo2,ed2,emod2,einf4,eo4,ed4,emod4,einf5,eo5,ed5,emod5,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+%     
+% end
+
+% Tsstand=[];
+% for i = 1:length(w)
+%     
+%    Tsstand(i)=TS(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+%     
+% end
+
+Tpstand=[];
+for i = 1:length(w)
+    
+   Tpstand(i)=TP(e1,e3,einf2,eo2,ed2,emod2,einf6,eo6,ed6,emod6,einf6,eo6,ed6,emod6,msheet,dsheet,a,Ka,R,h,dep,angl,w(i));
+    
+end
+
+tiledlayout(3,2);
+
+p1=nexttile;
+plot(p1,wavelenth,Rs*100,'--','linewidth',1)
+hold on
+plot(p1,wavelenth,Rsstand*100,'-','linewidth',1)
+hold off
+axis(p1,[400 900 0 100])
+xlabel(p1,'wavelength')
+ylabel(p1,'reflectance')
+title(p1,'s polarized light')
+
+p2=nexttile;
+plot(p2,wavelenth,Rp*100,':','linewidth',1)
+hold on
+plot(p2,wavelenth,Rpstand*100,'-','linewidth',1)
+hold off
+axis(p2,[400 900 0 100])
+xlabel(p2,'wavelength')
+ylabel(p2,'reflectance')
+title(p2,'p polarized light')
+
+p3=nexttile;
+plot(p3,wavelenth,Ts*100,'--','linewidth',1)
+hold on
+plot(p3,wavelenth,Tsstand*100,'-','linewidth',1)
+hold off
+axis(p3,[400 900 0 100])
+xlabel(p3,'wavelength')
+ylabel(p3,'transmitance')
+title(p3,'s polarized light')
+
+p4=nexttile;
+plot(p4,wavelenth,Tp*100,':','linewidth',1)
+hold on
+plot(p4,wavelenth,Tpstand*100,'-','linewidth',1)
+hold off
+axis(p4,[400 900 0 100])
+xlabel(p4,'wavelength')
+ylabel(p4,'transmitance')
+title(p4,'p polarized light')
+
+p5=nexttile;
+plot(p5,wavelenth,As*100,'--','linewidth',1)
+hold on
+plot(p5,wavelenth,Asstand*100,'-','linewidth',1)
+hold off
+axis(p5,[400 900 0 100])
+xlabel(p5,'wavelength')
+ylabel(p5,'Absorbance')
+title(p5,'s polarized light')
+
+p6=nexttile;
+plot(p6,wavelenth,Ap*100,':','linewidth',1)
+hold on
+plot(p6,wavelenth,Apstand*100,'-','linewidth',1)
+hold off
+axis(p6,[400 900 0 100])
+xlabel(p6,'wavelength')
+ylabel(p6,'absorbance')
+title(p6,'p polarized light')
+
+% 
+% plot(wavelenth,Ts*100)
+% A=1-R-T
+
+
+
+
