@@ -3,4 +3,4 @@
 
  This is the original code for the work in the paper 
 
- (Optical response of hyperbolic metamaterials with adsorbed nanoparticle arrays)[https://pubs.rsc.org/en/content/articlehtml/2022/nh/d2nh00015f]
+ [Optical response of hyperbolic metamaterials with adsorbed nanoparticle arrays](https://pubs.rsc.org/en/content/articlehtml/2022/nh/d2nh00015f)
